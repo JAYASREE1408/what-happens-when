@@ -460,7 +460,8 @@ responds with a response of the form::
     200 OK
     [response headers]
 
-Followed by a single newline, and then sends a payload of the HTML content of
+Followed by a single newline, and then sends a payload(What is payload in network?
+In computing, a payload is the carrying capacity of a packet or other transmission data unit. ... The term payload has two meanings: data payload, which is related to the transport of data across a network, and malware payload, which refers to malicious code used to exploit and compromise IT networks and systems.) of the HTML content of
 ``www.google.com``. The server may then either close the connection, or if
 headers sent by the client requested it, keep the connection open to be reused
 for further requests.
