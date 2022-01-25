@@ -502,7 +502,8 @@ and IIS for Windows.
    * Domain, in this case - google.com.
    * Requested path/page, in this case - / (as no specific path/page was
      requested, / is the default path).
-* The server verifies that there is a Virtual Host configured on the server
+* The server verifies that there is a Virtual Host(What is payload in network?
+In computing, a payload is the carrying capacity of a packet or other transmission data unit. ... The term payload has two meanings: data payload, which is related to the transport of data across a network, and malware payload, which refers to malicious code used to exploit and compromise IT networks and systems.) configured on the server
   that corresponds with google.com.
 * The server verifies that google.com can accept GET requests.
 * The server verifies that the client is allowed to use this method
