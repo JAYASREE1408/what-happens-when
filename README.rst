@@ -222,7 +222,7 @@ DNS lookup
 * If the DNS server is on the same subnet the network library follows the
   ``ARP process`` below for the DNS server.
 * If the DNS server is on a different subnet, the network library follows
-  the ``ARP process`` below for the default gateway IP.
+  the ``ARP process`` below for the default gateway IP( the default gateway IP address is the private IP address assigned to the router. This is the address that the router uses to communicate with a local home network).
 
 
 ARP process
@@ -237,14 +237,14 @@ the cache, the library function returns the result: Target IP = MAC.
 
 If the entry is not in the ARP cache:
 
-* The route table is looked up, to see if the Target IP address is on any of
+* The route table(A routing table is a set of rules, often viewed in table format, that is used to determine where data packets traveling over an Internet Protocol (IP) network will be directed. All IP-enabled devices, including routers and switches, use routing tables. ... Each packet contains information about its origin and destination.) is looked up, to see if the Target IP address is on any of
   the subnets on the local route table. If it is, the library uses the
   interface associated with that subnet. If it is not, the library uses the
   interface that has the subnet of our default gateway.
 
 * The MAC address of the selected network interface is looked up.
 
-* The network library sends a Layer 2 (data link layer of the `OSI model`_)
+* The network library(The Network library makes it possible to read and write data across machines on the Internet. It allows the creation clients and servers. A server connects to a list of clients for reading and writing data. A client is able to read and write data to a server) sends a Layer 2 (data link layer of the `OSI model`_)
   ARP request:
 
 ``ARP Request``::
