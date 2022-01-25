@@ -681,6 +681,57 @@ GPU Rendering
   software layers split the task into multiple pieces, so it can take advantage
   of ``GPU`` massive parallelism for float point calculations required for
   the rendering process.
+  
+
+YOUTUBE VIDEO:
+---------------
+
+* Reflows
+* Hardware Accelerated CSS
+* Animation
+* Web Workers
+* Benchmarking
+* Build Scripts
+
+Reflows:
+--------
+
+DOM Tree + Styles Struct = Render Tree
+After that we will paint
+
+- Diffference between dom tree and render tree is when we give the display is none,then if we manipulate the window size or dom size the render changes....
+Reflow means recalculating the render tree...Recalculating the bottom of it or recalculating the entire thing around it.
+
+- They showed the debug version of firefox--->The diagram(After the footer one thing happened on a sudden,and then ut recalculated the whole thing on a sudden.
+This is the thing we need to allow...There may be four page reflow.
+
+What happens on reflows?
+
+- The properties and methods that causes reflow are - clientHeight,clientLeft,clientTop,clientWidth,focus,scrollIntoView
+- Display none,resizing the window,chnaging the font size
+- Eg: Optimization we used to avoid recalculation...Small Jquery code.What se used there is getting here and setting and again getting here and setting.This property is going to trigger recalculation.To avoid recalculation we need to bunch all our get and set together.In 1st eg we kind of do it twice...But in second eg we did it only once.@nd eg 3 ms we finish it.But in 1st we finish it 4 ms.
+
+Stategies:
+- display none properties manipulations
+
+Hardware Accelerated CSS:
+-------------------------
+
+- Leverages CSS transitions and transforms for optimal quality.Eg: Isotope
+- This is the isotope.Here we use 2d translate.WE may imagine that we use absolute translate.
+
+Animation:
+----------
+- We can use translateZ(0) or translate3d(0,0,0)
+
+Debugging:
+----------
+- 
+
+
+
+
+
 
 
 Window Server
