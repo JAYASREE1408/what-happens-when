@@ -291,7 +291,7 @@ Now that the network library has the IP address of either our DNS server or
 the default gateway it can resume its DNS process:
 
 * The DNS client establishes a socket to UDP port 53 on the DNS server,
-  using a source port above 1023.
+  using a source port above 1023.(Port numbers above 1023 can be either registered or dynamic (also called private or non-reserved). Registered ports are in the range 1024 to 49151. Dynamic ports are in the range 49152 to 65535. As mentioned, most new port assignments are in the range from 1024 to 49151.)
 * If the response size is too large, TCP will be used instead.
 * If the local/ISP DNS server does not have it, then a recursive search is
   requested and that flows up the list of DNS servers until the SOA is reached,
