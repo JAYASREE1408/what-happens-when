@@ -215,7 +215,7 @@ DNS lookup
   OS) to do the lookup.
 * ``gethostbyname`` checks if the hostname can be resolved by reference in the
   local ``hosts`` file (whose location `varies by OS`_) before trying to
-  resolve the hostname through DNS.
+  resolve the hostname through DNS.(C:\Windows\System32\drivers\etc)
 * If ``gethostbyname`` does not have it cached nor can find it in the ``hosts``
   file then it makes a request to the DNS server configured in the network
   stack. This is typically the local router or the ISP's caching DNS server.
