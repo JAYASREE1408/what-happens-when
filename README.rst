@@ -223,6 +223,13 @@ DNS lookup
   ``ARP process`` below for the DNS server.
 * If the DNS server is on a different subnet, the network library follows
   the ``ARP process`` below for the default gateway IP( the default gateway IP address is the private IP address assigned to the router. This is the address that the router uses to communicate with a local home network).
+  
+  
+  //DNS PROCESS
+  
+  * The TLD domain servers return the address of the Authoritative DNS servers to the Resolver. ... The answer is simple: when you purchase any domain with the registrars like Godaddy or Namecheap, the registrars also communicate the domains to the TLD name server. So it is able to contact the Authoritative Name servers
+  
+  * Authoritative Name Server - finally, the Resolver sends the query to the Authoritative Name Server which is is responsible for that domain (as indicated in a Zone File on the TLD Name Server). This DNS server knows the IP address for the full domain, www.example.com, and returns that answer to the DNS Resolver.
 
 
 ARP process
@@ -294,7 +301,7 @@ the default gateway it can resume its DNS process:
   using a source port above 1023.(Port numbers above 1023 can be either registered or dynamic (also called private or non-reserved). Registered ports are in the range 1024 to 49151. Dynamic ports are in the range 49152 to 65535. As mentioned, most new port assignments are in the range from 1024 to 49151.)
 * If the response size is too large, TCP will be used instead.
 * If the local/ISP DNS server does not have it, then a recursive search is
-  requested and that flows up the list of DNS servers until the SOA is reached,
+  requested and that flows up the list of DNS servers until the SOA(A Start of Authority record (abbreviated as SOA record) is a type of resource record in the Domain Name System (DNS) containing administrative information about the zone, especially regarding zone transfers) is reached,
   and if found an answer is returned.
 
 Opening of a socket(Sockets are commonly used for client and server interaction. Typical system configuration places the server on one machine, with the clients on other machines. The clients connect to the server, exchange information, and then disconnect. A socket has a typical flow of events.)
