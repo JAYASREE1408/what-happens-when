@@ -709,7 +709,7 @@ What happens on reflows?
 
 - The properties and methods that causes reflow are - clientHeight,clientLeft,clientTop,clientWidth,focus,scrollIntoView
 - Display none,resizing the window,chnaging the font size
-- Eg: Optimization we used to avoid recalculation...Small Jquery code.What se used there is getting here and setting and again getting here and setting.This property is going to trigger recalculation.To avoid recalculation we need to bunch all our get and set together.In 1st eg we kind of do it twice...But in second eg we did it only once.@nd eg 3 ms we finish it.But in 1st we finish it 4 ms.
+- Eg: Optimization we used to avoid recalculation...Small Jquery code.What se used there is getting here and setting and again getting here and setting.This property is going to trigger recalculation.To avoid recalculation we need to bunch all our get and set together.In 1st eg we kind of do it twice...But in second eg we did it only once and eg 3 ms we finish it.But in 1st we finish it 4 ms.
 
 Stategies:
 - display none properties manipulations
@@ -717,16 +717,55 @@ Stategies:
 Hardware Accelerated CSS:
 -------------------------
 
-- Leverages CSS transitions and transforms for optimal quality.Eg: Isotope
-- This is the isotope.Here we use 2d translate.WE may imagine that we use absolute translate.
+- Leverages CSS transitions and transforms for optimal quality.Eg: Isotope---This is 2d transform moving on a 2d plane.
+- This is the isotope.Here we use 2d translate.We may imagine that we use absolute translate.
 
 Animation:
 ----------
+
+- Its kind of trick.After adding it,it looks good.
 - We can use translateZ(0) or translate3d(0,0,0)
 
 Debugging:
 ----------
-- 
+- Over the about flag it ahs settings...It has really crazy stuff.Here is the presentation.It shows in a 3d view.
+
+requestAnimationFrame:
+---------------------
+- Browser can optimize into a single reflow/repaint cycle.
+- JS based animation synchronized with CSS transitions or SVG SMIL
+- If we are in that tab we dont usually waste the cpu or gpu in order to make this happen
+- When you return back the CPU usage starts...This is the jquery.
+
+Web Workers:
+------------
+- Move heavy computation, expension tasks outside the UI thread.
+- new Worker myworker.js
+- Go and work with the files.
+
+Inline Workers:
+---------------
+- when we create a worker we use window.URL.createObject.Use workers when 
+1.Text Formatting of a long document
+2.Syntax highlighting
+3.Image processing
+4.Image Synthesis
+5.Processing large arrays
+6.Audio API
+7.FileSystem API (build on chrome)
+
+JSPERF:
+-------
+- It is a site for performance tests.We have few things going on here.we have nice human readable urls.String join, concatenation tests.These are faster...So don't use array join.
+- clearing house of perf best practice advice.It is powered by benchmark.js
+
+HTML5BOILERPLATE:
+-----------------
+- Build script is ant script....BAsiccally 90% on your score for goolge pagespeed.--Apache and Nginx.
+- Combines and minifies javascript
+- Combines and minifies CSS
+- Optimizes JPGs and PNGs
+- Basic to aggressive html minification
 
 
 
