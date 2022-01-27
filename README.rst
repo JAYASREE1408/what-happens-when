@@ -685,7 +685,7 @@ GPU Rendering
 
 YOUTUBE VIDEO:
 ---------------
-
+- Lets see about the css3,html5 and dom performance.
 * Reflows
 * Hardware Accelerated CSS
 * Animation
@@ -695,20 +695,23 @@ YOUTUBE VIDEO:
 
 Reflows:
 --------
-
-DOM Tree + Styles Struct = Render Tree
+- Dom tree is the result after we tokenize and parse the html.
+- DOM Tree + Styles Struct = Render Tree
 After that we will paint
 
 - Diffference between dom tree and render tree is when we give the display is none,then if we manipulate the window size or dom size the render changes....
 Reflow means recalculating the render tree...Recalculating the bottom of it or recalculating the entire thing around it.
 
 - They showed the debug version of firefox--->The diagram(After the footer one thing happened on a sudden,and then ut recalculated the whole thing on a sudden.
-This is the thing we need to allow...There may be four page reflow.
+This is the thing we need to allow...There may be four page reflow to be avoid.
+
+- elemet.Offsetwidth is normally the trick...Tony G on the Chrome team dug into this and tried to answer.So Tony dug in just opened up google code search and looked for u[date layout ignore pending style sheets.--->This is essentially what does a reflow in Webkit.
 
 What happens on reflows?
 
-- The properties and methods that causes reflow are - clientHeight,clientLeft,clientTop,clientWidth,focus,scrollIntoView
-- Display none,resizing the window,chnaging the font size
+- The properties and methods that causes reflow are - offsetWidth,clientHeight,clientLeft,clientTop,clientWidth,focus,scrollIntoView
+- Manipulating the dom tree will call a reflow...Adding,removing and updating the dom tree will cause a reflow.
+- Display none,resizing the window,changing the font size and adding new styles.
 - Eg: Optimization we used to avoid recalculation...Small Jquery code.What se used there is getting here and setting and again getting here and setting.This property is going to trigger recalculation.To avoid recalculation we need to bunch all our get and set together.In 1st eg we kind of do it twice...But in second eg we did it only once and eg 3 ms we finish it.But in 1st we finish it 4 ms.
 
 Stategies:
@@ -718,19 +721,21 @@ Hardware Accelerated CSS:
 -------------------------
 
 - Leverages CSS transitions and transforms for optimal quality.Eg: Isotope---This is 2d transform moving on a 2d plane.
-- This is the isotope.Here we use 2d translate.We may imagine that we use absolute translate.
+- This is the isotope.Here we use 2d transform translate and also css transitions.We may imagine that we use absolute translate.This kind of power of animations is hardware accelerated CSS.
+- Normally 2d transforms and operation on 2d plane dont get hardware accelerated by webkit browser.But there is a trick....
 
 Animation:
 ----------
-
+- First thing I am showing is it is without the 3d transform.
 - Its kind of trick.After adding it,it looks good.
-- We can use translateZ(0) or translate3d(0,0,0)
+- We can use translateZ(0) or translate3d(0,0,0).I will be using this and it looks good and smooth.
 
 Debugging:
 ----------
-- Over the about flag it ahs settings...It has really crazy stuff.Here is the presentation.It shows in a 3d view.
+- color animation here we use translateZ(0) in safari
+- Over in chrome,we have somewhat similar thing we have the about flag it ahs settings...It has really crazy stuff.Here is the presentation.It shows in a 3d view.
 
-requestAnimationFrame:
+requestAnimationFrame():
 ---------------------
 - Browser can optimize into a single reflow/repaint cycle.
 - JS based animation synchronized with CSS transitions or SVG SMIL
@@ -739,33 +744,38 @@ requestAnimationFrame:
 
 Web Workers:
 ------------
-- Move heavy computation, expension tasks outside the UI thread.
-- new Worker myworker.js
+- We want to move the heavy performance,expensive tasks outside the UI thread.If something is taking a long time,the user cant interact the page...It becomes non responsive.In case of chrome we get a sad freezing cold tab.
+- Move heavy computation, expension tasks outside the UI thread.So we do without the web workers.
+- normally ---  new Worker myworker.js we can do with inline workers.
 - Go and work with the files.
 
 Inline Workers:
 ---------------
+- Here is an example of creating the worker on the fly basically...Here we have a worker code...Use the file api we are going to use blobBuilder...Create a new Blobbuilder.Then we are going to grab the text of this script node,throw that into the blob.And then when we create our worker , we are going to use URL.createobject URL with the blob and checks that in.Essentially we create a file on the fly and then instantiate the worker with that.And so now we have the advantage of having a little bit more control over the worker in case we want to change it or something like that.And then also we avoid an HTTP run trip.So from a network layer,we are little bit more optimised as well.So that is just kind of cool example of where you can go with workers combined with the file API.PLaces where we use workers.
+
 - when we create a worker we use window.URL.createObject.Use workers when 
 1.Text Formatting of a long document
 2.Syntax highlighting
-3.Image processing
+3.Image processing - if you do heavy image processing depending on knind of analysis while you are running
 4.Image Synthesis
 5.Processing large arrays
 6.Audio API
-7.FileSystem API (build on chrome)
+7.FileSystem API (build on chrome)Also the file system API whuch is available on chrome has support for workers for a while now.And this is really good.we need to handle large binary data and dont want to holding up the UI thread at all.And so letting the web workers handle the interaction with the file systems is the right way to go there.
 
 JSPERF:
 -------
-- It is a site for performance tests.We have few things going on here.we have nice human readable urls.String join, concatenation tests.These are faster...So don't use array join.
-- clearing house of perf best practice advice.It is powered by benchmark.js
+- It is a site for performance tests.We have few things going on here.We have nice human readable urls.String join, concatenation tests.These are faster...So don't use array join.
+- I like it because its kind of like the clearinghouse of performance.
+- clearing house of perf best practice advice.It is powered by benchmark.js.Works not only the browser but also node and Narwhal and Ringo.
 
 HTML5BOILERPLATE:
 -----------------
-- Build script is ant script....BAsiccally 90% on your score for goolge pagespeed.--Apache and Nginx.
+- Build script is ant script....Basiccally going to get 90% on your score for goolge pagespeed or Yslow.--Apache and Nginx.
 - Combines and minifies javascript
 - Combines and minifies CSS
 - Optimizes JPGs and PNGs
 - Basic to aggressive html minification
+- The script does all the things.
 
 
 
